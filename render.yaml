@@ -35,20 +35,47 @@ services:
         fromDatabase:
           name: n8n_db
           property: password
+      - key: DB_POSTGRESDB_SCHEMA
+        value: public
       # Application Settings
       - key: PORT
         value: 5678
-      - key: N8N_LOG_LEVEL
-        value: info
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+        #value: IMPORTANT
+      - key: WEBHOOK_TUNNEL_URL_SECRET # secret used to sign or authenticate webhooks that pass through a tunnel
+        generateValue: true
+      - key: N8N_HOST # public domain URL used to send emails, call API and webhooks
+        value: n8n.akkezi.com
+      - key: N8N_EDITOR_BASE_URL # public URL for web editor
+        value: https://n8n.akkezi.com
+      - key: VUE_APP_URL_BASE_API # allows you to connect the n8n editor with the server that manages the workflows
+        value: https://n8n.akkezi.com/
+      - key: WEBHOOK_URL # URL used by n8n to expose normal webhooks (those that don't go through tunnels)
+        value: https://n8n.akkezi.com/
+      - key: TUNNEL_WEBHOOK_URL # Special URL if you are using a tunnel (e.g., webhook forwarding) for webhooks. This variable lets n8n know where to route webhooks.
+        value: https://n8n.akkezi.com/
       - key: GENERIC_TIMEZONE
         value: Europe/Paris
       - key: TZ
         value: Europe/Paris
+      - key: N8N_LOG_LEVEL
+        value: verbode # or info
       - key: N8N_DEFAULT_LOCALE
         value: fr
-      - key: N8N_ENCRYPTION_KEY
-        generateValue: true
-
+      # Execution Settings
+      - key: EXECUTIONS_DATA_PRUNE
+        value: "true"
+      - key: EXECUTIONS_DATA_MAX_AGE
+        value: "2160" # 3 months
+      - key: EXECUTIONS_DATA_SAVE_ON_ERROR
+        value: all # or none
+      - key: EXECUTIONS_DATA_SAVE_ON_SUCCESS
+        value: all # or none
+      - key: EXECUTIONS_DATA_SAVE_ON_PROGRESS
+        value: "false"
+      - key: EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS
+        value: "false"
 databases:
   - name: n8n_db
     region: frankfurt # optional (defaults to oregon)
