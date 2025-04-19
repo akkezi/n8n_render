@@ -2,7 +2,7 @@ services:
   - type: web
     name: n8n_ui
     env: docker
-    region: paris # optional (defaults to oregon)
+    region: frankfurt # optional (defaults to oregon)
     plan: free # optional (defaults to starter)
     branch: main # optional (defaults to master)
     numInstances: 1
@@ -35,9 +35,9 @@ services:
       - key: N8N_LOG_LEVEL
         value: info
       - key: GENERIC_TIMEZONE
-        value: Europe/Paris
+        value: Europe/frankfurt
       - key: TZ
-        value: Europe/Paris
+        value: Europe/frankfurt
       - key: N8N_DEFAULT_LOCALE
         value: fr
       - key: N8N_ENCRYPTION_KEY
@@ -45,5 +45,5 @@ services:
 
 databases:
   - name: n8n_db
-    region: paris # optional (defaults to oregon)
+    region: frankfurt # optional (defaults to oregon)
     plan: free
